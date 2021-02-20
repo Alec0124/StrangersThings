@@ -8,7 +8,8 @@ import {
 import {
   Auth,
   Posts,
-  Profile
+  Profile,
+  Header
 } from './components';
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
         <Link to="/posts">Posts </Link>
         <Link to="/profile">Profile</Link>
       </nav>
-
+      <Header />
       <Route path='/auth'>
         <Auth />
       </Route>
