@@ -1,4 +1,7 @@
 Hello dream team!
 
+Titile // Home Posts Profile Log Out
 
-This is justins edit.
+API
+FORMAT / HEADER
+COMPONENTS
