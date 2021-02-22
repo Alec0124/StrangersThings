@@ -1,4 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
+const profileHeader = () => {
+    return <>
+    Profile
+    </>
+}
+
 
 const Header = () => {
 
@@ -12,14 +20,25 @@ const Header = () => {
     return <>
         <section id="header">
             <img id="logo-image" src='./logo.png' alt='Site Logo' />
-            <div id='auth'>
-                <button id='login-button'>
-                    Login
-                </button>
-                <button id='register-button'>
-                    Register
-                </button>
-            </div>
+
+                <Link id="header-posts" to="/posts">
+                        Posts
+                </Link>
+                <Link id="header-profile" to="/profile">
+                    {profileHeader()}
+                </Link>
+                <div id='auth'>
+                    <Link to="/auth/login">
+                        <button id='login-button'>
+                            Login
+                        </button>
+                    </Link>
+                    <Link to="/auth/register">
+                        <button id='register-button'>
+                            Register
+                        </button>
+                    </Link>
+                </div>
         </section>
     </>
 

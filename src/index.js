@@ -16,11 +16,6 @@ const App = () => {
   return (
     <>
 
-      <nav>
-        <Link to="/auth">Auth </Link>
-        <Link to="/posts">Posts </Link>
-        <Link to="/profile">Profile</Link>
-      </nav>
       <Header />
       <Route path='/auth'>
         <Auth />

@@ -1,7 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
     Link
-  } from 'react-router-dom';
+} from 'react-router-dom';
+
+const messageTimeStamp = (message) => {
+    if (!!message.date) {
+        return message.date.toDateString() + ' ' + message.date.toUTCString();
+    }
+    return null;
+}
 
 const Profile = (/* messages, user */) => {
 
@@ -107,21 +114,21 @@ const Profile = (/* messages, user */) => {
     return <>
         <section id='main'>
             <section id='main-header'>
-                <button 
-                className={isInboxSelected ? 'active' : null} 
-                id='inbox-button'
-                onClick={() => {
-                    setIsInboxSelected(true);
-                }}
+                <button
+                    className={isInboxSelected ? 'active' : null}
+                    id='inbox-button'
+                    onClick={() => {
+                        setIsInboxSelected(true);
+                    }}
                 >
                     Inbox
                 </button>
-                <button 
-                className={!isInboxSelected ? 'active' : null}
-                id='outbox-button'
-                onClick={() => {
-                    setIsInboxSelected(false);
-                }}
+                <button
+                    className={!isInboxSelected ? 'active' : null}
+                    id='outbox-button'
+                    onClick={() => {
+                        setIsInboxSelected(false);
+                    }}
                 >
                     Outbox
                 </button>
@@ -131,25 +138,29 @@ const Profile = (/* messages, user */) => {
 
                 {
                     messages.map(message => {
-                        if((isInboxSelected && message.fromUser._id !== user._id) || (!isInboxSelected && message.fromUser._id === user._id)) {
+                        if ((isInboxSelected && message.fromUser._id !== user._id) || (!isInboxSelected && message.fromUser._id === user._id)) {
 
-                        return <div key={message._id} className='message'>
-                            <div className='message-header'>
-                                <span className='sender'>Sender: {message.fromUser.username}</span>
-                                <span className='timestamp'>Null Timestamp</span>
+                            return <div key={message._id} className='message'>
+                                <div className='message-header'>
+                                    <span className='sender'>
+                                        Sender: {message.fromUser.username}
+                                    </span>
+                                    <span className='timestamp'>
+                                        {messageTimeStamp(message)}
+                                    </span>
+                                </div>
+                                <div className='message-body'>
+                                    {message.content}
+                                </div>
+                                <span>
+                                    <Link to={"../Posts/" + message.post._id}>
+                                        <button>
+                                            {isInboxSelected ? 'View Post' : 'Send Message'}
+                                        </button>
+                                    </Link>
+                                    <span>{message.post.title}</span>
+                                </span>
                             </div>
-                            <div className='message-body'>
-                                {message.content}
-                            </div>
-                            <span>
-                                <Link to={"../Posts/" + message.post._id}>
-                                <button>
-                                    {isInboxSelected ? 'View Post' : 'Send Message'}
-                                </button>
-                                </Link>
-                    <span>{message.post.title}</span>
-                            </span>
-                        </div>
                         }
                         else {
                             return null;
