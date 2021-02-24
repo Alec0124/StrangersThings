@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -13,10 +13,17 @@ import {
 } from './components';
 
 const App = () => {
+
+  const [user, setUser] = useState({
+    id: '0124',
+    username: 'Burns'
+
+  });
+
   return (
     <>
 
-      <Header />
+      <Header user={user} setUser={setUser}/>
       <Route path='/auth'>
         <Auth />
       </Route>
