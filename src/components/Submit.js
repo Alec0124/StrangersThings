@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Posts = () => {
+const Submit = () => {
     return <>
             
         </>
     
 }
 
-export default Posts;
+export default Submit;

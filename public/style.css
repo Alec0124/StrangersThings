@@ -107,3 +107,44 @@ button.active {
     color: darkgreen;
     font-weight: bolder;
 }
+#home {
+    display: grid;
+    grid-template: 1fr / 1fr 3fr 1fr;
+}
+#introduction {
+    display: grid;
+    grid-template: 1fr 3fr 1fr / 1fr 1fr;
+}
+#introduction div {
+    border: 2px solid black;
+}
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    /* border: 2px solid blue; */
+}
+#introduction > div:nth-child(1) {
+    grid-area: 1 / 1 / 2 / 3;
+}
+#introduction > div:nth-child(2) {
+    grid-area: 2 / 1 / 3 / 2;
+}
+#introduction > div:nth-child(3) {
+    grid-area: 2 / 2 / 3 / 3;
+}
+#introduction > div:nth-child(4) {
+    grid-area: 3 / 1 / 4 / 3;
+}
+#send-message {
+    display: grid;
+    grid-template: 1fr 3fr 1fr / 1fr;
+}
+#send-message h2 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+#send-message input {
+    grid-area: 2 / 1 / 3 / 2;
+}
+#send-message button {
+    grid-area: 3 / 1 / 4 / 2;
+}

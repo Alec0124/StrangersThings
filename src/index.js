@@ -1,38 +1,73 @@
 
-import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
+import React, { useContext, createContext, useState } from "react";
 import {
   BrowserRouter as Router,
-  Route, Link
-} from 'react-router-dom';
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 import {
-  Auth,
   Posts,
   Profile,
-  Header
+  Header,
+  Home,
+  Login,
+  Logout,
+  Register,
+  Inbox,
+  Outbox,
+  SendMessage,
+  Submit
+
 } from './components';
+
 
 const App = () => {
 
-  const [user, setUser] = useState({
-    id: '0124',
-    username: 'Burns'
+  //user object passed around when user is logged in
+  const [user, setUser] = useState(null);
+  const [messages, setMessages] = useState(null);
 
-  });
 
   return (
     <>
 
-      <Header user={user} setUser={setUser}/>
-      <Route path='/auth'>
-        <Auth />
+      <Header user={user} setUser={setUser} />
+      <Route path='/login'>
+        <Login />
       </Route>
-      <Route path="/posts">
-        <Posts />
+      <Route path='/logout'>
+        <Logout />
       </Route>
-      <Route path="/profile">
-        <Profile />
+      <Route path='/register'>
+        <Register />
       </Route>
+      <Switch>
+        <Route path="/posts/submit">
+          <Submit />
+        </Route>
+        <Route path="/posts">
+          <Posts />
+        </Route>
+      </Switch>
+      <Switch>
+        <Route path="/profile">
+          <Profile user={user} />
+        </Route>
+        <Route path='/profile/inbox'>
+          <Inbox user={user} messages={messages} />
+        </Route >
+      <Route path='/profile/outbox'>
+        <Outbox user={user} messages={messages} />
+      </Route >
+      <Route exact path='/'>
+        <Home />
+      </Route>
+    </Switch>
     </>
   )
 }

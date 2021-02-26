@@ -16,12 +16,12 @@ const authSection = (user, setUser) => {
 
     if (!user) {
         return <>
-            <Link to="/auth/login">
+            <Link to="/login">
                 <button id='login-button'>
                     Login
                 </button>
             </Link>
-            <Link to="/auth/register">
+            <Link to="/register">
                 <button id='register-button'>
                     Register
                 </button>
@@ -43,10 +43,6 @@ const authSection = (user, setUser) => {
 
 const Header = ({ user, setUser }) => {
 
-    // my user token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDJmMTMyYmZlOTRjOTAwMTczMDBkYWIiLCJ1c2VybmFtZSI6ImFsZWMwMTI0IiwiaWF0IjoxNjEzNjk3ODM1fQ.DOLRzZ3Cq3KmJuEy609GzewAO8LJHBbjBXUCCntbirU"
-    //user alec0124
-    //password oranges
-
     return <>
         <section id="header">
             <div id='auth'>
@@ -58,7 +54,7 @@ const Header = ({ user, setUser }) => {
                     Posts
                 </Link>
                 <Link id="header-profile" to="/profile">
-                    {profileHeader(user)}
+                    Pofile
                 </Link>
             </div>
         </section>

@@ -10,9 +10,11 @@ const messageTimeStamp = (message) => {
     return null;
 }
 
-const Profile = (/* messages, user */) => {
+const Profile = ({user}) => {
 
     const [isInboxSelected, setIsInboxSelected] = useState(true);
+
+
 
     const sampleResp = {
         "posts": [
@@ -99,10 +101,17 @@ const Profile = (/* messages, user */) => {
 
     const messages = sampleResp.messages;
     console.log(messages);
-    const user = {
-        '_id': "5e8d1f2539e7a70017a7c961",
-        'username': 'joe1234'
-    };
+
+    const renderNotLoggedIn = () => {
+        return <>
+            <div>
+                <h2>Please login to view your profile.</h2>
+                <button>Login</button>
+            </div>
+        </>
+    }
+
+
     if (isInboxSelected) {
 
     }
@@ -110,6 +119,12 @@ const Profile = (/* messages, user */) => {
     // my user token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDJmMTMyYmZlOTRjOTAwMTczMDBkYWIiLCJ1c2VybmFtZSI6ImFsZWMwMTI0IiwiaWF0IjoxNjEzNjk3ODM1fQ.DOLRzZ3Cq3KmJuEy609GzewAO8LJHBbjBXUCCntbirU"
     //user alec0124
     //password oranges
+
+    if(user === null) {
+        return <>
+            {renderNotLoggedIn()}
+        </>
+    }
 
     return <>
         <section id='main'>
