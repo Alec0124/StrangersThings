@@ -8,6 +8,7 @@ import {
 import {
   Auth,
   Posts,
+  Submit,
   Profile
 } from './components';
 
@@ -29,6 +30,9 @@ const App = () => {
       </Route>
       <Route path="/profile">
         <Profile />
+      </Route>
+      <Route path="/submit">
+        <Submit />
       </Route>
     </>
   )
