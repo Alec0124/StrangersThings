@@ -3,17 +3,9 @@ import {
     Link
 } from 'react-router-dom';
 
-const messageTimeStamp = (message) => {
-    if (!!message.date) {
-        return message.date.toDateString() + ' ' + message.date.toUTCString();
-    }
-    return null;
-}
+
 
 const Profile = ({user}) => {
-
-    const [isInboxSelected, setIsInboxSelected] = useState(true);
-
 
 
     const sampleResp = {

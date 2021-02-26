@@ -12,7 +12,6 @@ import {
 } from "react-router-dom";
 import {
   Posts,
-  Profile,
   Header,
   Home,
   Login,
@@ -55,9 +54,6 @@ const App = () => {
         </Route>
       </Switch>
       <Switch>
-        <Route path="/profile">
-          <Profile user={user} />
-        </Route>
         <Route path='/profile/inbox'>
           <Inbox user={user} messages={messages} />
         </Route >

@@ -37,7 +37,7 @@ const Home = () => {
                     <img />
                     <p>
                         Click here to register an account!
-                        </p>
+                    </p>
                 </div>
                 <div className='container-item'>
                     <h2>
