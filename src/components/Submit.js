@@ -22,7 +22,7 @@ const Submit = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer" + user.token
+                    // "Authorization": "Bearer" + user.token
                 },
                 body: JSON.stringify({
                     post: {
