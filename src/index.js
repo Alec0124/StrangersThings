@@ -39,7 +39,7 @@ const App = () => {
         <Logout />
       </Route>
       <Route path='/register'>
-        <Register />
+        <Register setUser={setUser} user={user}/>
       </Route>
       <Switch>
         <Route path="/posts/submit">

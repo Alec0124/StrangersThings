@@ -22,7 +22,7 @@ async function fetchPosts() {
 }
 
 async function fetchRegister(username, password) {
-    const response = await fetch(`${BASE_URL}/users/register`, {
+    return await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'

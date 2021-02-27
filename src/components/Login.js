@@ -8,18 +8,17 @@ const Login = ({setUser, user}) => {
     
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState(null);
-
-
-
+    // const [userList, setUserList] = useState([]);
+    
+// let username = document.getElementById('username');
+// let password = document.getElementById('password');
 
 
 
 // function store() {
-//   localStorage.setItem('username', username.value);
-//   localStorage.setItem('password', password.value);
-// }
+
 
 // function check() {
 
@@ -40,10 +39,7 @@ const Login = ({setUser, user}) => {
 
 
 
-
-
-
-// function App() {
+// function Login() {
 //     useEffect(() => {
 //         async function registerUser() {
 //             const result = await fetch(
@@ -54,8 +50,8 @@ const Login = ({setUser, user}) => {
 //                     },
 //                     body: JSON.stringify({
 //                       user: {
-//                         username: 'callatest',
-//                         password: '123test'
+//                         username,
+//                         password,
 //                       }
 //                     })
 //                   }).then(response => response.json())
@@ -65,6 +61,17 @@ const Login = ({setUser, user}) => {
 //                     .catch(console.error);
 //                 }
 //     })
+
+    // useEffect(() => {
+    //   getUsers()
+    //     .then(users => {
+    //     //   setUserList(users)
+    //     // })
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
+    // }, []);
   
 const usernameOnChange = (event) => {
   setUsername(event.target.value);
@@ -72,9 +79,9 @@ const usernameOnChange = (event) => {
 const passwordOnChange = (event) => {
   setPassword(event.target.value);
 }
-const confirmPasswordOnChange = (event) => {
-  setConfirmPassword(event.target.value);
-}
+// const confirmPasswordOnChange = (event) => {
+//   setConfirmPassword(event.target.value);
+// }
 const submitIsValid = () => {
   let result = {test: true};
   if(password.length < 4) {
@@ -129,10 +136,7 @@ async function submitOnClick(event) {
 
   return (
   <main id="main-holder">
-    { user ? console.log('redirect running') : null
-    }
-    { user ? <Redirect to='/posts' /> : null
-    }
+      {user ? <Redirect to='/posts' /> : null}
   <div className='App'></div>
     <h1 id="login-header">Login</h1>
     <div id="login-error-msg-holder">
@@ -144,15 +148,7 @@ async function submitOnClick(event) {
       <input onClick={submitOnClick} type="submit" value="Login" id="login-storgae-submit"></input>
       {errors}
     </form>
-    <h2 id="register-header">Register</h2>
-    <form id="register-storage">
-    <input type="text" name="username" id="username-field" className="register-storage-field" placeholder="Username"></input>
-      <input type="password" name="password" id="password-field" className="register-storage-field" placeholder="Password"></input>
-      <input onChange={confirmPasswordOnChange} type="password" name="confirm-password" id="confirm-password-field" className="login-storage-field" placeholder="Confirm Password"></input>
-      <input type="submit" value="Register" id="register-storage-submit"></input>
-    </form>
   </main>
 )
 }
-
 export default Login;
