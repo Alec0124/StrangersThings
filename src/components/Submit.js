@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
 //Fix Username Token and Test Submitting
-//
 
 
 
@@ -46,6 +45,7 @@ const Submit = () => {
         </header>
         <form id="submit" onSubmit={async (event) => {
             event.preventDefault();
+            alert("Post Submitted!");
             try {
                 await submitPost( title, description, price, location, willDeliver );
             } catch (error) {

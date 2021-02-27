@@ -8,28 +8,13 @@ import { Link } from 'react-router-dom';
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
 
-function filterPosts(postArr) {
-    if (postArr.author.username = user.username) {
-        return <>
-                    {postArr.map((posts, index) => {
-                return <div  id="posts" key={index}>
-            <button><Link to={`/posts/${posts._id}`}>Send Message</Link></button>
-            <h3 id="posts-title">{posts.title}</h3>
-            <p id="posts-description">{posts.description}</p>
-            <span id="posts-price"><b>Price:</b>   {posts.price}</span>
-            <span id="posts-seller"><b>Seller:</b>   {posts.author.username}</span>
-            <span className="posts-location"><b>Location:</b>   {posts.location}</span>
-            </div>
-            })}
-               </> }
-            return null;
-    }
-
-
 const Posts = () => {
     const [postArr, setPostArr] = useState(null);
+    const [isMyPosts, setIsMyPosts] = useState(false);
 
-
+ function onClickYourPosts() {
+     setIsMyPosts(true);
+ }
 
     async function fetchPosts() {
         try {
@@ -49,31 +34,25 @@ const Posts = () => {
 }, []);
 
     function renderPosts(postArr) {
-        if (postArr.author.username = user.username) {
+        if (!! postArr) {
             return <>
             {postArr.map((posts, index) => {
+                if (!posts.isAuthor && isMyPosts) {
+                    return null;
+                }
                 return <div  id="posts" key={index}>
-            <button >Delete Post</button>
+            <button><Link to={`/posts/${posts._id}`}>Send Message</Link></button>
             <h3 id="posts-title">{posts.title}</h3>
             <p id="posts-description">{posts.description}</p>
             <span id="posts-price"><b>Price:</b>   {posts.price}</span>
             <span id="posts-seller"><b>Seller:</b>   {posts.author.username}</span>
             <span className="posts-location"><b>Location:</b>   {posts.location}</span>
+            {posts.willDeliver ? <span className="posts-willDeliver"><b>Will Deliver:</b>  Yes</span> : <span className="posts-willDeliver"><b>Will Deliver:</b>  No</span>}
             </div>
             })}
                </> }
-            return <>
-             {postArr.map((posts, index) => {
-                 return <div  id="posts" key={index}>
-             <button><Link to={`/posts/${posts._id}`}>Send Message</Link></button>
-             <h3 id="posts-title">{posts.title}</h3>
-             <p id="posts-description">{posts.description}</p>
-             <span id="posts-price"><b>Price:</b>   {posts.price}</span>
-             <span id="posts-seller"><b>Seller:</b>   {posts.author.username}</span>
-             <span className="posts-location"><b>Location:</b>   {posts.location}</span>
-             </div>
-             })}
-                </> }
+            return null;
+    }
 
     console.log(postArr);
 
@@ -81,7 +60,7 @@ const Posts = () => {
         <div id="posts-main">
             <header>
                 <h1>Things for Sale!</h1>
-                <button onClick={filterPosts}>Your Posts</button>
+                <button onClick={onClickYourPosts}>Your Posts</button>
                 <button> <Link to="/posts/submit">New Post</Link></button>
             </header>
             <section>
