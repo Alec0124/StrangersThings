@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const SendMessage = () => {
+const SendMessage = ({user}) => {
     const [content, setContent] = useState('');
 
     const contentOnChange = (event) => {
