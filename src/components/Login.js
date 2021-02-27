@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
+// import React, { useState } from 'react';
+// import { getUsers } from '../api'
 import "./Auth.css";
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login'
 
-const Auth = () => {
+const Login = () => {
+    // const [userList, setUserList] = useState([]);
     
-    
-
-
-
-const username = document.getElementById('username');
-const password = document.getElementById('password');
+let username = document.getElementById('username');
+let password = document.getElementById('password');
 
 function store() {
   localStorage.setItem('username', username.value);
@@ -35,31 +34,39 @@ function check() {
 
 
 
+function Login() {
+    useEffect(() => {
+        async function registerUser() {
+            const result = await fetch(
+                'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login', {
+                    method: "POST",
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      user: {
+                        username,
+                        password,
+                      }
+                    })
+                  }).then(response => response.json())
+                    .then(result => {
+                      console.log(result);
+                    })
+                    .catch(console.error);
+                }
+    })
 
-
-
-// function App() {
-//     useEffect(() => {
-//         async function registerUser() {
-//             const result = await fetch(
-//                 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login', {
-//                     method: "POST",
-//                     headers: {
-//                       'Content-Type': 'application/json'
-//                     },
-//                     body: JSON.stringify({
-//                       user: {
-//                         username: 'callatest',
-//                         password: '123test'
-//                       }
-//                     })
-//                   }).then(response => response.json())
-//                     .then(result => {
-//                       console.log(result);
-//                     })
-//                     .catch(console.error);
-//                 }
-//     })
+    // useEffect(() => {
+    //   getUsers()
+    //     .then(users => {
+    //     //   setUserList(users)
+    //     // })
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
+    // }, []);
   
 
   return (
@@ -74,14 +81,8 @@ function check() {
       <input type="password" name="password" id="password-field" class="login-storage-field" placeholder="Password"></input>
       <input type="submit" value="Login" id="login-storgae-submit"></input>
     </form>
-    <h2 id="register-header">Register</h2>
-    <form id="register-storage">
-    <input type="text" name="username" id="username-field" class="register-storage-field" placeholder="Username"></input>
-      <input type="password" name="password" id="password-field" class="register-storage-field" placeholder="Password"></input>
-      <input type="submit" value="Register" id="register-storgae-submit"></input>
-    </form>
   </main>
 )
 }
-
-export default Auth;
+}
+export default Login;
