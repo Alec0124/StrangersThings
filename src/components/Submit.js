@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
-
+//Fix Username Token and Test Submitting
 
 
 
@@ -22,7 +22,7 @@ const Submit = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // "Authorization": "Bearer" + user.token
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDJmMTMyYmZlOTRjOTAwMTczMDBkYWIiLCJ1c2VybmFtZSI6ImFsZWMwMTI0IiwiaWF0IjoxNjE0NDM5NTE2fQ.12RoHu3n-32754pmPgrukRkKV9bogdxR_3Ab2XpEfrY"
                 },
                 body: JSON.stringify({
                     post: {
@@ -39,12 +39,13 @@ const Submit = () => {
     };
 
 
-    return <div>
+    return <div id="submit-parent">
         <header>
             <h1>Submit Post</h1>
         </header>
         <form id="submit" onSubmit={async (event) => {
             event.preventDefault();
+            alert("Post Submitted!");
             try {
                 await submitPost( title, description, price, location, willDeliver );
             } catch (error) {
@@ -52,7 +53,7 @@ const Submit = () => {
             }
 
         }}>
-            <label>Post Title</label>
+            <label id="title-label">Title</label>
             <input
                 id="post-title"
                 type="text"
@@ -62,7 +63,7 @@ const Submit = () => {
                     setTitle(e.target.value)
                 }}
             />
-            <label>Post Description</label>
+            <label id="description-label">Description</label>
             <input
                 id="post-description"
                 type="text"
@@ -72,7 +73,7 @@ const Submit = () => {
                     setDescription(e.target.value)
                 }}
             />
-            <label>Price</label>
+            <label id="price-label">Price</label>
             <input
                 id="price"
                 type="text"
@@ -82,7 +83,7 @@ const Submit = () => {
                     setPrice(e.target.value)
                 }}
             />
-            <label>Location</label>
+            <label id="location-label">Location</label>
             <input
                 id="location"
                 type="text"
@@ -92,7 +93,7 @@ const Submit = () => {
                     setLocation(e.target.value)
                 }}
             />
-            <label>Will Deliver</label>
+            <label id="willDeliver-label">Will Deliver</label>
             <input
                 id="willDeliver"
                 type="checkbox"
@@ -101,7 +102,7 @@ const Submit = () => {
                     setWillDeliver(true)
                 }}
             />
-            <button>Submit</button>
+            <button id="submit-button">Submit</button>
         </form>
     </div>
 }
