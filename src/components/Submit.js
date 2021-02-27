@@ -1,3 +1,4 @@
+import { userInfo } from 'os';
 import React, { useEffect, useState } from 'react';
 
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
@@ -6,7 +7,7 @@ const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT'
 
 
 
-const Submit = () => {
+const Submit = ({user}) => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -22,7 +23,7 @@ const Submit = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDJmMTMyYmZlOTRjOTAwMTczMDBkYWIiLCJ1c2VybmFtZSI6ImFsZWMwMTI0IiwiaWF0IjoxNjE0NDM5NTE2fQ.12RoHu3n-32754pmPgrukRkKV9bogdxR_3Ab2XpEfrY"
+                    "Authorization": "Bearer" + user.token
                 },
                 body: JSON.stringify({
                     post: {

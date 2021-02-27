@@ -8,13 +8,30 @@ import { Link } from 'react-router-dom';
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
 
-const Posts = () => {
+const Posts = ({user}) => {
     const [postArr, setPostArr] = useState(null);
     const [isMyPosts, setIsMyPosts] = useState(false);
 
  function onClickYourPosts() {
      setIsMyPosts(true);
  }
+
+
+const deletePost = async () => {
+    const resp = await fetch(`${BASE_URL}/posts`,
+    {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer" + user.token
+}
+    }).then(response => response.json())
+     .then(result => {
+         console.log(result);
+     })
+     .catch(console.error);
+    }
+
 
     async function fetchPosts() {
         try {
@@ -24,7 +41,6 @@ const Posts = () => {
         } catch (error) {
             throw error;
         }
-
     }
 
     useEffect(() => {
@@ -53,8 +69,6 @@ const Posts = () => {
                </> }
             return null;
     }
-
-    console.log(postArr);
 
     return <main>
         <div id="posts-main">
