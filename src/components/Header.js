@@ -32,7 +32,7 @@ const authSection = (user, setUser) => {
         <div id='username'>
             {user.username}
         </div>
-        <Link to='/auth/logout'>
+        <Link to='/logout'>
             <button onClick={onClickLogout}>
                 Log Out
             </button>
