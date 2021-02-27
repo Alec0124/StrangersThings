@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+//Add Pagination
+//Fix Send Message Button
+//Filter by Your Posts
+
+import {
+    SendMessage
+  } from './index.js';
 
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
@@ -30,16 +37,13 @@ const Posts = () => {
         if (!! postArr) {
             return <>
             {postArr.map((posts, index) => {
-                return <div key={index}>
-            <h3>{posts.title}</h3>
-            <p>{posts.description}</p>
-            <span className="title">Price</span>
-            <span className="title">{posts.price}</span>
-            <span className="title">Seller</span>
-            <span className="content">{posts.seller}</span>
-            <span className="title">Location</span>
-            <span className="content">{posts.location}</span>
-            <button>Send Message</button>
+                return <div  id="posts" key={index}>
+            <button><Link to={`/posts/${posts._id}`}>Send Message</Link></button>
+            <h3 id="posts-title">{posts.title}</h3>
+            <p id="posts-description">{posts.description}</p>
+            <span id="posts-price"><b>Price:</b>   {posts.price}</span>
+            <span id="posts-seller"><b>Seller:</b>   {posts.seller}</span>
+            <span className="posts-location"><b>Location:</b>   {posts.location}</span>
             </div>
             })}
                </> }
@@ -48,11 +52,11 @@ const Posts = () => {
     }
     console.log(postArr);
     return <main>
-        <div>
+        <div id="posts-main">
             <header>
-                <h1>Posts</h1>
+                <h1>Things for Sale!</h1>
                 <button>Your Posts</button>
-                <button> <Link to="/submit">Submit</Link> </button>
+                <button> <Link to="/posts/submit">New Post</Link></button>
             </header>
             <section>
                 {renderPosts(postArr)}
