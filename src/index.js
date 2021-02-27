@@ -4,11 +4,7 @@ import React, { useContext, createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
+  Route
 } from "react-router-dom";
 import {
   Posts,
@@ -37,13 +33,13 @@ const App = () => {
 
       <Header user={user} setUser={setUser} />
       <Route path='/login'>
-        <Login />
+        <Login setUser={setUser}/>
       </Route>
       <Route path='/logout'>
         <Logout />
       </Route>
       <Route path='/register'>
-        <Register />
+        <Register setUser={setUser} user={user}/>
       </Route>
       <Switch>
         <Route path="/posts/submit">
