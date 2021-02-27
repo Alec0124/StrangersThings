@@ -33,7 +33,7 @@ const App = () => {
 
       <Header user={user} setUser={setUser} />
       <Route path='/login'>
-        <Login setUser={setUser}/>
+        <Login setUser={setUser} user={user}/>
       </Route>
       <Route path='/logout'>
         <Logout />

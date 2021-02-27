@@ -75,4 +75,23 @@ async function fetchMe() {
         .catch(console.error)
 }
 
-export  {fetchLogin, fetchRegister};
+async function postMessage(token, post, messageBody) {
+    await fetch(`${BASE_URL}/posts/${post._id}/messages`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          message: {
+            content: messageBody
+          }
+        })
+      }).then(response => response.json())
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.error);
+}
+
+export  {fetchLogin, fetchRegister, postMessage};

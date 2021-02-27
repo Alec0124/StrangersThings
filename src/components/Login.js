@@ -4,7 +4,7 @@ import {fetchLogin} from "../api/index.js";
 import { Redirect } from 'react-router-dom';
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login'
 
-const Login = ({setUser}) => {
+const Login = ({setUser, user}) => {
     
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -106,7 +106,7 @@ async function submitOnClick(event) {
           username: username,
           token: response.data.token,
         });
-        return <Redirect to='/posts' />;
+        console.log('user:', user)
       } else {
         setErrors(
           <>
@@ -129,6 +129,10 @@ async function submitOnClick(event) {
 
   return (
   <main id="main-holder">
+    { user ? console.log('redirect running') : null
+    }
+    { user ? <Redirect to='/posts' /> : null
+    }
   <div className='App'></div>
     <h1 id="login-header">Login</h1>
     <div id="login-error-msg-holder">
