@@ -1,8 +1,14 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 
-const Logout = () => {
+const Logout = ({setUser, user}) => {
+
+    setUser(null);
+    localStorage.clear('username');
+    localStorage.clear('token');
+
     return <>
-        {/* proccess log out; return to home*/}
+        <Redirect to='/login' />
     </>
 }
 

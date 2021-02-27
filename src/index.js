@@ -1,6 +1,6 @@
 
 import ReactDOM from 'react-dom';
-import React, { useContext, createContext, useState } from "react";
+import React, { useContext, createContext, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,29 +27,37 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState(null);
 
+  useEffect(() => {
+    if(localStorage.getItem('username')) {
+      setUser({
+        username: localStorage.getItem('username'),
+        token: localStorage.getItem('token')
+      })
+    }
+  } ,[])
 
   return (
     <>
 
       <Header user={user} setUser={setUser} />
       <Route path='/login'>
-        <Login setUser={setUser}/>
+        <Login setUser={setUser} user={user}/>
       </Route>
       <Route path='/logout'>
-        <Logout />
+        <Logout user={user} setUser={setUser}/>
       </Route>
       <Route path='/register'>
-        <Register />
+        <Register setUser={setUser} user={user}/>
       </Route>
       <Switch>
         <Route path="/posts/submit">
           <Submit />
         </Route>
         <Route path="/posts/*">
-          <SendMessage/>
+          <SendMessage user={user}/>
           </Route>
         <Route path="/posts">
-          <Posts />
+          <Posts user={user}/>
         </Route>
       </Switch>
       <Switch>

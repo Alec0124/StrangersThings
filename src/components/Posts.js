@@ -15,6 +15,27 @@ const Posts = ({user}) => {
  function onClickYourPosts() {
      setIsMyPosts(true);
  }
+ const createPostButton = (post) => {
+     if(user && user.username === post.author.username) {
+        return <button><Link to={`/posts/${post._id}`}>Delete Post</Link></button>
+     } else {
+         if(user) {
+        return <button><Link to={`/posts/${post._id}`}>Send Message</Link></button>
+         } else {
+             return <button><Link to={`/login`}>Send Message</Link></button>
+         }
+     }
+ }
+ const createPostsHeaderButtons = () => {
+     if(user) {
+     return <>
+    <button onClick={onClickYourPosts}>Your Posts</button>
+    <button> <Link to="/posts/submit">New Post</Link></button>
+    </>
+     } else {
+         return null;
+     }
+ }
 
 
 const deletePost = async () => {
@@ -53,11 +74,12 @@ const deletePost = async () => {
         if (!! postArr) {
             return <>
             {postArr.map((posts, index) => {
-                if (!posts.isAuthor && isMyPosts) {
+                console.log('posts: ', posts)
+                if (user && user.username !== posts.author.username && isMyPosts) {
                     return null;
                 }
                 return <div  id="posts" key={index}>
-            <button><Link to={`/posts/${posts._id}`}>Send Message</Link></button>
+            {createPostButton(posts)}
             <h3 id="posts-title">{posts.title}</h3>
             <p id="posts-description">{posts.description}</p>
             <span id="posts-price"><b>Price:</b>   {posts.price}</span>
@@ -74,8 +96,7 @@ const deletePost = async () => {
         <div id="posts-main">
             <header>
                 <h1>Things for Sale!</h1>
-                <button onClick={onClickYourPosts}>Your Posts</button>
-                <button> <Link to="/posts/submit">New Post</Link></button>
+                {createPostsHeaderButtons()}
             </header>
             <section>
                 {renderPosts(postArr)}
