@@ -4,7 +4,7 @@
     grid-template: 100px 1fr / 1fr;
     width: 100%;
     height: 50pc;
-    padding: 10px;;
+    padding: 10px;
 }
 #header {
     grid-area: 1 / 1 / 2 / 2;
@@ -147,4 +147,102 @@ button.active {
 }
 #send-message button {
     grid-area: 3 / 1 / 4 / 2;
+}
+
+/* Posts CSS */
+  #posts-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+  }
+
+  #posts {
+        width: 600px;
+        margin: 20px auto;
+        padding: 5px;
+        border: 2px solid black;
+        display: grid;
+        text-align: center;
+        grid-template-rows: repeat(5, 1fr);
+  }
+#posts button {
+    justify-self: right;
+    grid-area: 1 / 1;
+}
+
+#posts-title {
+    grid-area: 1 / 1;
+}
+
+/* Submit CSS */
+
+#submit-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#submit {
+    width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid black;
+    display: grid;
+    text-align: center;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+}
+
+#submit label {
+    font-weight: bold;
+    align-items: center;
+}
+
+#post-title {
+    grid-area: 1 / 2 / 1 / span 3;
+}
+
+#title-label {
+    grid-area: 1 / 1;
+}
+
+#post-description {
+    grid-area: 2 / 2 / 2 / span 3;
+}
+
+#description-label {
+    grid-area: 2 / 1 / 2 / 1;
+}
+
+#price {
+    grid-area: 3 / 2 / 3 / span 3;
+}
+
+#price-label {
+    grid-area: 3 / 1 / 3 / 1;
+}
+
+#location {
+    grid-area: 4 / 2 / 4 / span 3;
+}
+
+#location-label {
+    grid-area: 4 / 1 / 4 / 1;
+}
+
+#willDeliver {
+    grid-area: 5 / 2 / 5 / span 3;
+}
+
+#willDeliver-label {
+    grid-area: 5 / 1 / 5 / 1;
+}
+
+#submit-button {
+    grid-area: 6 / 2 / 6 / 3;
+    font-size: 25px;
+    width: 100px;
 }

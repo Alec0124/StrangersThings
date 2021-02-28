@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 
-const SendMessage = () => {
+const SendMessage = ({user}) => {
     const [content, setContent] = useState('');
 
     const contentOnChange = (event) => {
         setContent(event.target.value);
     }
     const sendMessageOnClick = (event) => {
+        postMessage(user.token, )
         //this is where async fetch function comes to push message to "messages" array within the post object in api
         // postMessage(post, content)
     }

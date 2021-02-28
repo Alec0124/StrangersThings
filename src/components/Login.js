@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "./Auth.css";
 import { fetchLogin } from "../api/index.js";
 import { Redirect } from 'react-router-dom';
+// import { fetchLogin, fetchMe } from "../api/index.js";
+
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login'
 
-const Login = ({ setUser, user }) => {
+
+const Login = ({ user, setUser }) => {
+
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -153,4 +157,5 @@ const Login = ({ setUser, user }) => {
     </main>
   )
 }
+
 export default Login;

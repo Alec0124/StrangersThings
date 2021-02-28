@@ -1,6 +1,6 @@
 
 import ReactDOM from 'react-dom';
-import React, { useContext, createContext, useState } from "react";
+import React, { useContext, createContext, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,50 +16,69 @@ import {
   Inbox,
   Outbox,
   SendMessage,
-  Submit
+  Submit,
+  Profile
 
 } from './components';
+import {fetchMe} from './api/index.js';
 
 
 const App = () => {
 
   //user object passed around when user is logged in
   const [user, setUser] = useState(null);
-  const [messages, setMessages] = useState(null);
 
+  useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    if (!!localUser) {
+      console.log('user in storage: ', localUser)
+      setUser(localUser);
+      console.log('user: ', user);
+      // fetchMe(user.token)
+      // .then(user => {
+      //   console.log('user: ', user);
+      //   setUser(user)})
+    }
+  }, [setUser])
 
   return (
     <>
 
       <Header user={user} setUser={setUser} />
       <Route path='/login'>
-        <Login setUser={setUser}/>
+        <Login setUser={setUser} user={user} />
       </Route>
       <Route path='/logout'>
-        <Logout />
+        <Logout user={user} setUser={setUser} />
       </Route>
       <Route path='/register'>
-        <Register setUser={setUser} user={user}/>
+        <Register setUser={setUser} user={user} />
       </Route>
       <Switch>
         <Route path="/posts/submit">
           <Submit />
         </Route>
+        <Route path="/posts/*">
+          <SendMessage user={user} />
+        </Route>
         <Route path="/posts">
-          <Posts />
+          <Posts user={user} />
         </Route>
       </Switch>
       <Switch>
         <Route path='/profile/inbox'>
-          <Inbox user={user} messages={messages} />
+          <Inbox user={user} />
         </Route >
-      <Route path='/profile/outbox'>
-        <Outbox user={user} messages={messages} />
-      </Route >
+        <Route path='/profile/outbox'>
+          <Outbox user={user} />
+        </Route >
+        <Route path='/profile'>
+          <Profile user={user}/>
+        </Route >
+      </Switch>
       <Route exact path='/'>
         <Home />
       </Route>
-    </Switch>
     </>
   )
 }

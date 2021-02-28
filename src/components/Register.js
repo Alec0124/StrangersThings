@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Auth.css";
-import {fetchRegister} from "../api/index.js";
+import {fetchMe, fetchRegister} from "../api/index.js";
 import { Redirect } from 'react-router-dom';
 // import { resourceLimits } from 'worker_threads';
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login'
@@ -27,12 +27,17 @@ const Register = ({setUser, user}) => {
         .then(data => {
             console.log (data)
             if(data.success) {
-                setUser({
-                    username: username,
-                    token: data.data.token,
-                })
-                localStorage.setItem('username', username);
-                localStorage.setItem('token', data.data.token);
+                fetchMe(data.data.token).then(user => {
+                  setUser(user);
+                  setUser({token: data.data.token});
+                });
+                localStorage.setItem('user', user);
+                // setUser({
+                //     username: username,
+                //     token: data.data.token,
+                // })
+                // localStorage.setItem('username', username);
+                // localStorage.setItem('token', data.data.token);
             }
             else {
                 setErrors(
