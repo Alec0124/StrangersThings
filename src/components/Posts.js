@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {fetchPosts} from '../api/index.js';
 
 //Add Pagination
 //Filter by Your Posts
@@ -37,16 +38,6 @@ const Posts = ({user}) => {
      }
  }
 
-    async function fetchPosts() {
-        try {
-            const response = await fetch(`${BASE_URL}/posts`)
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            throw error;
-        }
-
-    }
 
     useEffect(() => {
     fetchPosts().then(data => {

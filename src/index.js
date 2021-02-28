@@ -17,7 +17,8 @@ import {
   Outbox,
   SendMessage,
   Submit,
-  Profile
+  Profile,
+  ViewPost
 
 } from './components';
 import {fetchMe} from './api/index.js';
@@ -59,7 +60,7 @@ const App = () => {
           <Submit />
         </Route>
         <Route path="/posts/:id">
-          {/* <ViewPost /> */}
+          <ViewPost user={user}/>
           <SendMessage user={user} />
         </Route>
         <Route path="/posts">

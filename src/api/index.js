@@ -10,9 +10,9 @@ const GAMES_ARRAY = [
 ];
 export { GAMES_ARRAY };
 
-async function fetchPost(post_id) {
+async function fetchPosts() {
     try {
-        const response = await fetch(`${BASE_URL}/posts/${post_id}`)
+        const response = await fetch(`${BASE_URL}/posts`)
         const data = await response.json();
         return data;
     } catch (error) {
@@ -95,4 +95,4 @@ async function postMessage(token, post, messageBody) {
         .catch(console.error);
 }
 
-export  {fetchLogin, fetchRegister, postMessage, fetchMe};
+export  {fetchLogin, fetchRegister, postMessage, fetchMe, fetchPosts};
