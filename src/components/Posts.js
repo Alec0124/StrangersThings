@@ -58,7 +58,6 @@ const Posts = ({user}) => {
         if (!! postArr) {
             return <>
             {postArr.map((posts, index) => {
-                console.log('posts: ', posts)
                 if (user && user.username !== posts.author.username && isMyPosts) {
                     return null;
                 }
@@ -75,8 +74,6 @@ const Posts = ({user}) => {
                </> }
             return null;
     }
-
-    console.log(postArr);
 
     return <main>
         <div id="posts-main">

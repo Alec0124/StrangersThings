@@ -61,11 +61,12 @@ async function fetchLogin(username, password) {
         .catch(console.error)
 }
 
-async function fetchMe() {
-    await fetch(`${BASE_URL}/users/me`, {
+async function fetchMe(token) {
+    return await fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         }
     })
         .then(response => response.json())
@@ -94,4 +95,4 @@ async function postMessage(token, post, messageBody) {
         .catch(console.error);
 }
 
-export  {fetchLogin, fetchRegister, postMessage};
+export  {fetchLogin, fetchRegister, postMessage, fetchMe};
