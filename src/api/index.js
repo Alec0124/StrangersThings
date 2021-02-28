@@ -10,9 +10,9 @@ const GAMES_ARRAY = [
 ];
 export { GAMES_ARRAY };
 
-async function fetchPosts() {
+async function fetchPost(post_id) {
     try {
-        const response = await fetch(`${BASE_URL}/posts`)
+        const response = await fetch(`${BASE_URL}/posts/${post_id}`)
         const data = await response.json();
         return data;
     } catch (error) {
@@ -77,7 +77,7 @@ async function fetchMe(token) {
 }
 
 async function postMessage(token, post, messageBody) {
-    await fetch(`${BASE_URL}/posts/${post._id}/messages`, {
+    await fetch(`${BASE_URL}/posts/${post}/messages`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ async function postMessage(token, post, messageBody) {
         })
       }).then(response => response.json())
         .then(result => {
-          console.log(result);
+          console.log('postMessage result', result);
         })
         .catch(console.error);
 }

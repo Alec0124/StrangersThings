@@ -58,7 +58,8 @@ const App = () => {
         <Route path="/posts/submit">
           <Submit />
         </Route>
-        <Route path="/posts/*">
+        <Route path="/posts/:id">
+          {/* <ViewPost /> */}
           <SendMessage user={user} />
         </Route>
         <Route path="/posts">
