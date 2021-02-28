@@ -8,3 +8,4 @@ export {default as Outbox} from './Outbox.js';
 export {default as Register} from './Register.js';
 export {default as SendMessage} from './SendMessage.js';
 export {default as Submit} from './Submit.js';
+export {default as UserPost} from './UserPost.js';

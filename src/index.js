@@ -16,7 +16,8 @@ import {
   Inbox,
   Outbox,
   SendMessage,
-  Submit
+  Submit,
+  UserPost
 
 } from './components';
 
@@ -51,11 +52,14 @@ const App = () => {
       </Route>
       <Switch>
         <Route path="/posts/submit">
-          <Submit />
+          <Submit user={user}/>
         </Route>
-        <Route path="/posts/*">
+        <Route path="/posts/:id" children={<Posts user={user}/>}>
           <SendMessage user={user}/>
           </Route>
+          <Route path="/posts/:id" children={<Posts user={user}/>}>
+          <UserPost user={user}/>
+        </Route>
         <Route path="/posts">
           <Posts user={user}/>
         </Route>

@@ -15,7 +15,7 @@ const Submit = ({user}) => {
     const [location, setLocation] = useState('');
     const [willDeliver, setWillDeliver] = useState(false);
 
-
+console.log(user);
 
     const submitPost = async (title, description, price, location, willDeliver) => {
         const resp = await fetch(`${BASE_URL}/posts`,
@@ -23,7 +23,7 @@ const Submit = ({user}) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer" + user.token
+                    "Authorization": "Bearer " + user.token
                 },
                 body: JSON.stringify({
                     post: {
