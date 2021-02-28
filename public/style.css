@@ -4,7 +4,7 @@
     grid-template: 100px 1fr / 1fr;
     width: 100%;
     height: 50pc;
-    padding: 10px;;
+    padding: 10px;
 }
 #header {
     grid-area: 1 / 1 / 2 / 2;

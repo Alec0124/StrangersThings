@@ -1,77 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "./Auth.css";
-import { fetchLogin } from "../api/index.js";
+import { fetchLogin, fetchMe } from "../api/index.js";
 import { Redirect } from 'react-router-dom';
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login'
 
-const Login = ({ setUser, user }) => {
+const Login = ({ user, setUser }) => {
+
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   // const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState(null);
-  // const [userList, setUserList] = useState([]);
-
-  // let username = document.getElementById('username');
-  // let password = document.getElementById('password');
-
-
-
-  // function store() {
-
-
-  // function check() {
-
-  //   const storedUsername = localStorage.getItem('username');
-  //   const storedPassword = localStorage.getItem('password');
-
-  //   const username = document.getElementById('username');
-  //   const password = document.getElementById('password');
-
-  //   if(username.value !== storedUsername || password.value !== storedPassword) {
-  //       alert('ERROR');
-  //   }else {
-  //       alert('You are loged in.');
-  //   }
-
-  // }
-
-
-
-
-  // function Login() {
-  //     useEffect(() => {
-  //         async function registerUser() {
-  //             const result = await fetch(
-  //                 'https://strangers-things.herokuapp.com/api/2010_UNF_RM_WEB_PT/users/login', {
-  //                     method: "POST",
-  //                     headers: {
-  //                       'Content-Type': 'application/json'
-  //                     },
-  //                     body: JSON.stringify({
-  //                       user: {
-  //                         username,
-  //                         password,
-  //                       }
-  //                     })
-  //                   }).then(response => response.json())
-  //                     .then(result => {
-  //                       console.log(result);
-  //                     })
-  //                     .catch(console.error);
-  //                 }
-  //     })
-
-  // useEffect(() => {
-  //   getUsers()
-  //     .then(users => {
-  //     //   setUserList(users)
-  //     // })
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }, []);
 
   const usernameOnChange = (event) => {
     setUsername(event.target.value);
@@ -79,9 +18,6 @@ const Login = ({ setUser, user }) => {
   const passwordOnChange = (event) => {
     setPassword(event.target.value);
   }
-  // const confirmPasswordOnChange = (event) => {
-  //   setConfirmPassword(event.target.value);
-  // }
   const submitIsValid = () => {
     let result = { test: true };
     if (password.length < 4) {
@@ -94,12 +30,25 @@ const Login = ({ setUser, user }) => {
     }
     return result;
   }
-  async function submitOnClick(event) {
+  const updateUserState = (object, token) => {
+    console.log('updateUserState() running');
+    console.log('object', object);
+    console.log('token', token);
+    let result = { ...object };
+    result.token = token;
+    setRefUser(result);
+  }
+  const myStateRef = useRef(user);
+  const setRefUser = data => {
+    myStateRef.current = data;
+    setUser(data);  
+  };
+
+  const submitOnClick = (event) => {
     event.preventDefault();
     if (submitIsValid().test) {
       fetchLogin(username, password)
         .then((response) => {
-          console.log('response', response);
           // {
           //   "success": true,
           //   "error": null,
@@ -108,13 +57,15 @@ const Login = ({ setUser, user }) => {
           //     "message": "Thanks for logging in to our service."
           //   }
           // }
+
           if (response.success) {
-            setUser({
-              username: username,
-              token: response.data.token,
-            });
-            localStorage.setItem('username', username);
-            localStorage.setItem('token', response.data.token);
+
+            fetchMe(response.data.token).then(data => {
+              updateUserState(data.data, response.data.token);
+              return data;
+            }).then(data => {
+              localStorage.setItem('user', JSON.stringify(myStateRef.current));
+            })
           } else {
             setErrors(
               <>
@@ -132,6 +83,8 @@ const Login = ({ setUser, user }) => {
         </>
       );
     }
+
+    console.log('aferFetchMeInLogin user: ', user);
   }
 
 
