@@ -2,7 +2,7 @@ html {
     height: 100%;
   }
   
-  body {
+  /* body {
     height: 100%;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -10,31 +10,40 @@ html {
     justify-items: center;
     align-items: center;
     background-color: whitesmoke;
-  }
+  } */
 
-  h1 {
-    height: 100%;
-    margin: 0;
+  h1#login-header {
     font-family: Arial, Helvetica, sans-serif;
-    display: grid;
     justify-items: center;
     align-items: center;
+  }
+
+  h1#register-header {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    grid-area: 2/1/3/2;
+    flex-flow: row nowrap;
+    justify-content: space-around;
   }
   
 
   #main-holder {
-    width: 500px;
-    height: 400px;
-    display: grid;
-    align-self: center;
-    justify-items: center;
-    align-items: center;
+    display: flex;
+    grid-area: 2/1/3/2;
+    flex-flow: row nowrap;
+    justify-content: space-around;
     background-color: white;
     border-radius: 7px;
     box-shadow: 0px 0px 5px 2px red;
   }
+
+  /* #main-content {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 2px solid black;
+  } */
   
-  #login-error-msg-holder {
+  /* #login-error-msg-holder {
     width: 100%;
     height: 100%;
     display: grid;
@@ -57,21 +66,23 @@ html {
   
   #error-msg-second-line {
     display: block;
-  }
+  } */
   
-  #login-form {
+  #login-storage {
     align-self: flex-start;
-    display: grid;
+    display: flex;
     justify-items: center;
     align-items: center;
   }
 
-  #register-form {
+  #register-storage {
     align-self: flex-start;
-    display: grid;
+    display: flex;
     justify-items: center;
     align-items: center;
+    flex-flow: column nowrap;
   }
+
   
   .login-form-field::placeholder {
     color: black;
@@ -87,6 +98,27 @@ html {
   }
   
   #login-form-submit {
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    background-color: #3a3a3a;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .register-form-field {
+    border: none;
+    border-bottom: 1px solid #3a3a3a;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px 0px 5px 5px;
+  }
+  
+  #register-form-submit {
     width: 100%;
     padding: 7px;
     border: none;
