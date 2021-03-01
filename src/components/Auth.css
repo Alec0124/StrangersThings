@@ -9,7 +9,7 @@ body {
   display: grid;
   justify-items: center;
   align-items: center;
-  background-color: rgb(243, 243, 243);
+  background-color: #e1f1f0;
 }
 
 h1 {
@@ -30,7 +30,7 @@ h1 {
   align-self: center;
   justify-items: center;
   align-items: center;
-  background-color: rgb(243, 243, 243);
+  background-color: #e1f1f0;
   border-radius: 7px;
   background: url(https://media3.giphy.com/media/lPFiUJAaKvQ2cYi39c/source.gif);
   background-size: 700px;
@@ -62,13 +62,13 @@ h1 {
 } */
 
 #login-form {
-  display: grid;
+  display: flex;
   justify-items: center;
   align-items: center;
 }
 
 #register-form {
-  display: grid;
+  display: flex;
   flex-flow: column nowrap;
   justify-items: center;
   align-items: center;

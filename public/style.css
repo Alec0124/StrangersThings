@@ -1,5 +1,5 @@
 #app {
-    background-color: rgb(243, 243, 243);
+    background-color: #e1f1f0;
     display: grid;
     grid-template: 100px 1fr / 1fr;
     width: 100%;
@@ -51,7 +51,7 @@
 }
 #main-body {
     grid-area: 2 / 1 / 3 / 2;
-    background-color: rgb(243, 243, 243);
+    background-color: #e1f1f0;
     align-self: stretch;
     display: flex;
     flex-flow: column nowrap;
@@ -63,7 +63,7 @@
     padding: 10px;
     display: grid;
     grid-template: 1fr 4fr / 1fr;
-    border: 2px solid #365abd;
+    border: 4mm ridge #365abd;
 }
 
 .message-header {
@@ -164,11 +164,11 @@ button.active {
         width: 600px;
         margin: 20px auto;
         padding: 5px;
-        border: 2px solid black;
+        border: thick double #32a1ce;
         display: grid;
         text-align: center;
         grid-template-rows: repeat(5, 1fr);
-        background-color: #e1f1f0;
+        background-color: white;
   }
 #posts button {
     justify-self: right;
@@ -186,13 +186,14 @@ button.active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #e1f1f0;
 }
 
 #submit {
     width: 900px;
     margin: 20px auto;
     padding: 20px;
-    border: 2px solid black;
+    border: thick double black;
     display: grid;
     text-align: center;
     grid-template-rows: repeat(6, 1fr);
