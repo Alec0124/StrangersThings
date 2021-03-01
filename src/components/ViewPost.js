@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchPosts } from '../api/index.js';
+import { fetchPosts, deletePost } from '../api/index.js';
 import SendMessage from './SendMessage.js';
 
 const ViewPost = ({ user }) => {
@@ -26,6 +26,7 @@ const ViewPost = ({ user }) => {
                 <span id="posts-seller"><b>Seller:</b>   {singlePostObject.author.username}</span>
                 <span className="posts-location"><b>Location:</b>   {singlePostObject.location}</span>
                 {singlePostObject.willDeliver ? <span className="posts-willDeliver"><b>Will Deliver:</b>  Yes</span> : <span className="posts-willDeliver"><b>Will Deliver:</b>  No</span>}
+                <button onClick={deletePost}> Delete Post </button>
             </div>);
         });
     }, []);

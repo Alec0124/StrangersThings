@@ -1,4 +1,3 @@
-// Api Goes Here
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 const GAMES_ARRAY = [
     {
@@ -95,4 +94,23 @@ async function postMessage(token, post, messageBody) {
         .catch(console.error);
 }
 
-export  {fetchLogin, fetchRegister, postMessage, fetchMe, fetchPosts};
+const deletePost = async () => {
+    
+    await fetch(`${BASE_URL}/posts/${id}`,
+    {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + user.token
+}
+    }).then(response => response.json())
+     .then(result => {
+         console.log(result);
+         alert('Post Has Been Deleted');
+        //  renderPosts(postArr);
+     })
+     .catch(console.error);
+    }
+
+
+export  {fetchLogin, fetchRegister, postMessage, fetchMe, deletePost, fetchPosts};

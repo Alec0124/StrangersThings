@@ -19,7 +19,6 @@ import {
   Submit,
   Profile,
   ViewPost
-
 } from './components';
 import {fetchMe} from './api/index.js';
 
@@ -57,7 +56,7 @@ const App = () => {
       </Route>
       <Switch>
         <Route path="/posts/submit">
-          <Submit />
+          <Submit user={user}/>
         </Route>
         <Route path="/posts/:id">
           <ViewPost user={user}/>
