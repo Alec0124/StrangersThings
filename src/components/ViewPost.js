@@ -1,49 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, {useEffect, useState, useRef} from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchPosts, deletePost } from '../api/index.js';
+import SendMessage from './SendMessage.js';
 
-const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
+const ViewPost = ({ user }) => {
 
-const ViewPost = ({user}) => {
-    
-    let { id } = useParams();
-    console.log(id);
+    const { id } = useParams();
+    const [singlePost, setSinglePost] = useState(<>Fail to update</>);
+    const [singlePostObject, setSinglePostObject] = useState({});
 
-    function renderPosts(postArr) {
-        if (!! postArr) {
-            return <>
-            {postArr.map((posts, index) => {
-                if (user && user.username !== posts.author.username && isMyPosts) {
-                    return null;
-                }
-                return <div  id="posts" key={index}>
-            {createPostButton(posts)}
-            <h3 id="posts-title">{posts.title}</h3>
-            <p id="posts-description">{posts.description}</p>
-            <span id="posts-price"><b>Price:</b>   {posts.price}</span>
-            <span id="posts-seller"><b>Seller:</b>   {posts.author.username}</span>
-            <span className="posts-location"><b>Location:</b>   {posts.location}</span>
-            {posts.willDeliver ? <span className="posts-willDeliver"><b>Will Deliver:</b>  Yes</span> : <span className="posts-willDeliver"><b>Will Deliver:</b>  No</span>}
-            </div>
-            })}
-               </> }
-            return null;
-            
-    }
+const userRef = useRef({...user});
 
-    return <main>
-        <div id="posts-main">
-            <header>
-                <h1>Things for Sale!</h1>
-                {createPostsHeaderButtons()}
-            </header>
-            <section>
-                {renderPosts(postArr)}
-            </section>
-        </div>
-    </main>
+const renderSendMessage = (singlePostObject) => {
+    console.log(userRef.curent);
+    if(userRef.current && userRef.current.username === singlePostObject.author.username) {
+        return null;
+    } return <SendMessage user={user}/>
 
+}
+
+    useEffect(() => {
+    fetchPosts()
+        .then(data => {
+            console.log('posts data: ', data.data.posts);
+            return data.data.posts;
+        })
+        .then(data => {
+            setSinglePostObject(data.find(object => object._id === id));
+            console.log('single post: ', singlePostObject)
+                setSinglePost(<div>
+                <h3 id="posts-title">{singlePostObject.title}</h3>
+                <p id="posts-description">{singlePostObject.description}</p>
+                <span id="posts-price"><b>Price:</b>   {singlePostObject.price}</span>
+                <span id="posts-seller"><b>Seller:</b>   {singlePostObject.author.username}</span>
+                <span className="posts-location"><b>Location:</b>   {singlePostObject.location}</span>
+                {singlePostObject.willDeliver ? <span className="posts-willDeliver"><b>Will Deliver:</b>  Yes</span> : <span className="posts-willDeliver"><b>Will Deliver:</b>  No</span>}
+                <button onClick={deletePost}> Delete Post </button>
+            </div>);
+        });
+    }, []);
+
+
+    return <section id="view-post">
+        {singlePost}
+        {renderSendMessage(singlePostObject)}
+    </section>
 }
 
 export default ViewPost;
-
-}

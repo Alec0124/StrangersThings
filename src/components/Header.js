@@ -54,7 +54,7 @@ const Header = ({ user, setUser }) => {
                     Posts
                 </Link>
                 <Link id="header-profile" to="/profile">
-                    Pofile
+                    Profile
                 </Link>
             </div>
         </section>

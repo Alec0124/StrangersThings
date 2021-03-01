@@ -9,3 +9,4 @@ export {default as Register} from './Register.js';
 export {default as SendMessage} from './SendMessage.js';
 export {default as Submit} from './Submit.js';
 export {default as Profile} from './Profile.js';
+export {default as ViewPost} from './ViewPost.js';

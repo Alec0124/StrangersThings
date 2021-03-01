@@ -3,11 +3,6 @@ import {Link} from 'react-router-dom';
 import {postMessage} from '../api/index.js';
 
 const Inbox = ({user}) => {
-    
-    const sendMessageOnClick = () => {
-        console.log('Sending Message...')
-        postMessage(user.token, '602c6528fcc4550017328649', 'HELLO WORLD!');
-    }
 
     const renderNotLoggedIn = () => {
         return <>
@@ -85,10 +80,6 @@ const Inbox = ({user}) => {
                     Outbox
                 </button>
                 </Link>
-                <button onClick={sendMessageOnClick}>
-                    Send a message!
-                </button>
-
             </section>
             <section id="main-body">
                 {renderOutbox(user.messages)}

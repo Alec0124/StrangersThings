@@ -1,4 +1,3 @@
-// Api Goes Here
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 const GAMES_ARRAY = [
     {
@@ -10,9 +9,9 @@ const GAMES_ARRAY = [
 ];
 export { GAMES_ARRAY };
 
-async function fetchPost(post_id) {
+async function fetchPosts() {
     try {
-        const response = await fetch(`${BASE_URL}/posts/${post_id}`)
+        const response = await fetch(`${BASE_URL}/posts`)
         const data = await response.json();
         return data;
     } catch (error) {
@@ -114,4 +113,4 @@ const deletePost = async () => {
     }
 
 
-export  {fetchLogin, fetchRegister, postMessage, fetchMe, deletePost};
+export  {fetchLogin, fetchRegister, postMessage, fetchMe, deletePost, fetchPosts};

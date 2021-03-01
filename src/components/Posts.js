@@ -1,5 +1,6 @@
+import { title } from 'process';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
@@ -7,9 +8,9 @@ const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT'
 const Posts = ({user}) => {
     const [postArr, setPostArr] = useState(null);
     const [isMyPosts, setIsMyPosts] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
-    let { id } = useParams();
-    console.log(id);
 
  function onClickYourPosts() {
      setIsMyPosts(true);
@@ -18,11 +19,10 @@ const Posts = ({user}) => {
   function refreshPage() {
       window.location.reload(false);
     }
-    
 
  const createPostButton = (post) => {
      if(user && user.username === post.author.username) {
-        return <button>View Post</button>
+        return  <button><Link to={`/posts/${post._id}`}>View Post</Link></button>
      } else {
          if(user) {
         return <button><Link to={`/posts/${post._id}`}>Send Message</Link></button>
@@ -37,11 +37,37 @@ const Posts = ({user}) => {
     <button onClick={onClickYourPosts}>View Your Posts</button>
     <button onClick={refreshPage}>View All Posts</button>
     <button> <Link to="/posts/submit">New Post</Link></button>
+    <form >
+    <fieldset>
+      <label>Search Posts:  </label>
+      <input
+        id="keywords"
+        type="text"
+        />
+    </fieldset>
+    <button>Search</button>
+    </form>
     </>
      } else {
          return null;
      }
  }
+ 
+ function postMatches(post, text) {
+   // return true if any of the fields you want to check against include the text
+   // strings have an .includes() method 
+        post.title.includes(text) ? true : null;
+        post.description.includes(text) ? true : null;
+        post.price.includes(text) ? true : null;
+        post.location.includes(text) ? true : null;
+        post.seller.includes(text) ? true : null;
+    return false;
+ }
+ 
+ const filteredPosts = posts.filter(post => postMatches(post, searchTerm));
+ const postsToDisplay = searchTerm.length ? filteredPosts : posts;
+ 
+ // then, in our jsx below... map over postsToDisplay instead of posts
 
 
 
@@ -60,8 +86,9 @@ const Posts = ({user}) => {
         setPostArr(data.data.posts);
     })
 }, []);
-console.log(postArr);
+
     function renderPosts(postArr) {
+        console.log(postArr);
         if (!! postArr) {
             return <>
             {postArr.map((posts, index) => {
@@ -90,7 +117,7 @@ console.log(postArr);
                 {createPostsHeaderButtons()}
             </header>
             <section>
-                {renderPosts(postArr)}
+                {renderPosts(postsToDisplay)}
             </section>
         </div>
     </main>
