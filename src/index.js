@@ -31,13 +31,7 @@ const App = () => {
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
     if (!!localUser) {
-      console.log('user in storage: ', localUser)
       setUser(localUser);
-      console.log('user: ', user);
-      // fetchMe(user.token)
-      // .then(user => {
-      //   console.log('user: ', user);
-      //   setUser(user)})
     }
   }, [setUser])
 

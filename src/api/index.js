@@ -94,23 +94,26 @@ async function postMessage(token, post, messageBody) {
         .catch(console.error);
 }
 
-const deletePost = async () => {
-    
-    await fetch(`${BASE_URL}/posts/${id}`,
-    {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + user.token
-}
-    }).then(response => response.json())
-     .then(result => {
-         console.log(result);
-         alert('Post Has Been Deleted');
-        //  renderPosts(postArr);
-     })
-     .catch(console.error);
-    }
+// const deletePost = async () => {
+//     const {id} = useParam();
+
+//     await fetch(`${BASE_URL}/posts/${id}`,
+//     {
+//         method: "DELETE",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": "Bearer " + user.token
+// }
+//     }).then(response => response.json())
+//      .then(result => {
+//          console.log(result);
+//          alert('Post Has Been Deleted');
+//         //  renderPosts(postArr);
+//      })
+//      .catch(console.error);
+//     }
 
 
-export  {fetchLogin, fetchRegister, postMessage, fetchMe, deletePost, fetchPosts};
+export  {fetchLogin, fetchRegister, postMessage, fetchMe,
+    //  deletePost,
+      fetchPosts};
