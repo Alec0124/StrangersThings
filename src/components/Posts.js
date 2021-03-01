@@ -122,7 +122,7 @@ const Posts = ({ user }) => {
                     </fieldset>
             </header>
             <section>
-                {renderPosts(postsToDisplay)}
+                {renderPosts(postArr)}
             </section>
         </div>
     </main>
