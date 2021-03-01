@@ -1,5 +1,5 @@
 #app {
-    background-color: lightgrey;
+    background-color: rgb(243, 243, 243);
     display: grid;
     grid-template: 100px 1fr / 1fr;
     width: 100%;
@@ -8,7 +8,7 @@
 }
 #header {
     grid-area: 1 / 1 / 2 / 2;
-    background-color: red;
+    background-color: #7579e7;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -16,17 +16,19 @@
 }
 #header-profile, #header-posts {
     border: 1px solid black;
-    background-color: blue;
+    background-color: #a3d8f4;
     font-size: 2rem;
+    margin: 3px;
     padding: 1em;
+    border-radius: 12px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-decoration: unset;
     align-self: stretch;
     flex-basis: 100px;
-    color: orange;
+    color: #28527a;
 }
 #header-profile:hover, #header-posts:hover {
-    background-color: slateblue;
+    background-color: white;
 }
 
 
@@ -41,7 +43,7 @@
 }
 #main-header {
     grid-area: 1 / 1 / 2 / 2;
-    background-color: green;
+    background-color: #845ec2;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
@@ -49,19 +51,19 @@
 }
 #main-body {
     grid-area: 2 / 1 / 3 / 2;
-    background-color: silver;
+    background-color: rgb(243, 243, 243);
     align-self: stretch;
     display: flex;
     flex-flow: column nowrap;
 }
 .message {
     flex: 0 0 200px;
-    background-color: thistle;
+    background-color: #9ab3f5;
     margin: 10px;
     padding: 10px;
     display: grid;
     grid-template: 1fr 4fr / 1fr;
-    border: 2px solid purple;
+    border: 2px solid #365abd;
 }
 
 .message-header {
@@ -84,7 +86,7 @@
 }
 button {
     margin: 5px;
-    background-color: silver;
+    background-color: #b9fffc;
     flex: 0 0 100px;
     padding: 5px;
     text-align: center;
@@ -97,14 +99,14 @@ button:hover {
     background-color: white;
 }
 button.active {
-    background-color: lightcoral;
+    background-color: #e5cfe5;
 }
 #username {
     padding: 5px;
     font-size: 2rem;
     text-align: center;
     font-family: fantasy;
-    color: darkgreen;
+    color: white;
     font-weight: bolder;
 }
 #home {
@@ -166,6 +168,7 @@ button.active {
         display: grid;
         text-align: center;
         grid-template-rows: repeat(5, 1fr);
+        background-color: #e1f1f0;
   }
 #posts button {
     justify-self: right;

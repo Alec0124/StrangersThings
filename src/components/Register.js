@@ -184,9 +184,9 @@ const submitIsValid = () => {
             {user ? <Redirect to='/posts' /> : null}
         <div className='App'></div>
           <h1 id="register-header">Register</h1>
-          <div id="login-error-msg-holder">
+          {/* <div id="login-error-msg-holder">
             <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
-          </div>
+          </div> */}
           <form id="register-storage">
           <input onChange={usernameOnChange} type="text" name="username" id="username-field" className="register-storage-field" placeholder="Username"></input>
           <input onChange={passwordOnChange}type="password" name="password" id="password-field" className="register-storage-field" placeholder="Password"></input>

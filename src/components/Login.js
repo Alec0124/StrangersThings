@@ -93,9 +93,9 @@ const Login = ({ user, setUser }) => {
       {user ? <Redirect to='/posts' /> : null}
       <div className='App'></div>
       <h1 id="login-header">Login</h1>
-      <div id="login-error-msg-holder">
+      {/* <div id="login-error-msg-holder">
         <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
-      </div>
+      </div> */}
       <form id="login-storage">
         <input onChange={usernameOnChange} type="text" name="username" id="username-field" className="login-storage-field" placeholder="Username"></input>
         <input onChange={passwordOnChange} type="password" name="password" id="password-field" className="login-storage-field" placeholder="Password"></input>
