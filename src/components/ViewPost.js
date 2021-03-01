@@ -1,7 +1,9 @@
 import React, {useEffect, useState, useRef} from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchPosts, deletePost } from '../api/index.js';
+import { fetchPosts } from '../api/index.js';
 import SendMessage from './SendMessage.js';
+
+const BASE_URL = 'https://strangers-things.herokuapp.com/api/2010-UNF-RM-WEB-PT';
 
 const ViewPost = ({ user }) => {
 
@@ -26,15 +28,32 @@ const ViewPost = ({ user }) => {
                 <span id="posts-seller"><b>Seller:</b>   {singlePostObject.author.username}</span>
                 <span className="posts-location"><b>Location:</b>   {singlePostObject.location}</span>
                 {singlePostObject.willDeliver ? <span className="posts-willDeliver"><b>Will Deliver:</b>  Yes</span> : <span className="posts-willDeliver"><b>Will Deliver:</b>  No</span>}
-                <button onClick={deletePost}> Delete Post </button>
             </div>);
         });
     }, []);
 
+    const deletePost = async () => {
+    
+        await fetch(`${BASE_URL}/posts/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + user.token
+    }
+        }).then(response => response.json())
+         .then(result => {
+             console.log(result);
+             alert('Post Has Been Deleted');
+             <Posts/>;
+         })
+         .catch(console.error);
+        }
+
 
     return <section id="view-post">
         {singlePost}
-        {isNotMyPost ? <SendMessage /> : null}
+        {isNotMyPost ? <SendMessage /> : <button onClick={deletePost}> Delete Post </button>}
     </section>
 }
 

@@ -117,7 +117,7 @@ const Posts = ({user}) => {
                 {createPostsHeaderButtons()}
             </header>
             <section>
-                {renderPosts(postsToDisplay)}
+                {renderPosts(postArr)}
             </section>
         </div>
     </main>
