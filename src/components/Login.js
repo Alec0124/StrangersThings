@@ -31,9 +31,6 @@ const Login = ({ user, setUser }) => {
     return result;
   }
   const updateUserState = (object, token) => {
-    console.log('updateUserState() running');
-    console.log('object', object);
-    console.log('token', token);
     let result = { ...object };
     result.token = token;
     setRefUser(result);
@@ -49,14 +46,7 @@ const Login = ({ user, setUser }) => {
     if (submitIsValid().test) {
       fetchLogin(username, password)
         .then((response) => {
-          // {
-          //   "success": true,
-          //   "error": null,
-          //   "data": {
-          //     "token": "xyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg5MDY2ZGQ0MzkxNjAwTc1NTNlMDUiLCJ1c2VybmFtZSI6Im1hdHQiLCJpYXQiOjE1ODYwMzgzODF9.CTj4owBl0PB-G6G4E_1l6DS6_cVc0iKcMzBIWFUYM1p",
-          //     "message": "Thanks for logging in to our service."
-          //   }
-          // }
+
 
           if (response.success) {
 

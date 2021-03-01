@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchPosts } from '../api/index.js';
+import SendMessage from './SendMessage.js';
 
 const ViewPost = ({ user }) => {
 
     const { id } = useParams();
     const [singlePost, setSinglePost] = useState(<>Fail to update</>);
+    const [isNotMyPost, setIsNotMyPost] = useState(false);
 
     useEffect(() => {
     fetchPosts()
@@ -15,7 +17,8 @@ const ViewPost = ({ user }) => {
         })
         .then(data => {
             const singlePostObject = data.find(object => object._id === id);
-            console.log('single post: ', singlePostObject)
+            console.log('single post: ', singlePostObject);
+            singlePostObject.author.username === user.username ? setIsNotMyPost(false) : setIsNotMyPost(true);
                 setSinglePost(<div>
                 <h3 id="posts-title">{singlePostObject.title}</h3>
                 <p id="posts-description">{singlePostObject.description}</p>
@@ -30,6 +33,7 @@ const ViewPost = ({ user }) => {
 
     return <section id="view-post">
         {singlePost}
+        {isNotMyPost ? <SendMessage /> : null}
     </section>
 }
 

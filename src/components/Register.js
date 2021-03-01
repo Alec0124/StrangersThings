@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "./Auth.css";
 import {fetchMe, fetchRegister} from "../api/index.js";
 import { Redirect } from 'react-router-dom';
@@ -16,7 +16,19 @@ const Register = ({setUser, user}) => {
 // let username = document.getElementById('username');
 // let password = document.getElementById('password');
 
-
+const updateUserState = (object, token) => {
+  console.log('updateUserState() running');
+  console.log('object', object);
+  console.log('token', token);
+  let result = { ...object };
+  result.token = token;
+  setRefUser(result);
+}
+const myStateRef = useRef(user);
+  const setRefUser = data => {
+    myStateRef.current = data;
+    setUser(data);
+  };
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -25,19 +37,14 @@ const Register = ({setUser, user}) => {
         console.log('validation is running')
         fetchRegister(username, password)
         .then(data => {
-            console.log (data)
             if(data.success) {
-                fetchMe(data.data.token).then(user => {
-                  setUser(user);
-                  setUser({token: data.data.token});
-                });
-                localStorage.setItem('user', user);
-                // setUser({
-                //     username: username,
-                //     token: data.data.token,
-                // })
-                // localStorage.setItem('username', username);
-                // localStorage.setItem('token', data.data.token);
+              console.log('register data: ', data);
+              fetchMe(data.data.token).then(data => {
+                updateUserState(data.data, data.data.token);
+                return data;
+              }).then(data => {
+                localStorage.setItem('user', JSON.stringify(myStateRef.current));
+              })
             }
             else {
                 setErrors(
